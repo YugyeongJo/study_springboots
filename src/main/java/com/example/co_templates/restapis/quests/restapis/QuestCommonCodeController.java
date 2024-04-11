@@ -1,4 +1,4 @@
-package com.example.co_templates.restapis.quests;
+package com.example.co_templates.restapis.quests.restapis;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class CommonCodeController {
+public class QuestCommonCodeController {
     // /commonCode/1/10/1
-    @GetMapping("/commonCode/list/{page_num}")
+    @GetMapping("/q/r/QuestcommonCode/list/{page_num}")
     public ResponseEntity<Object> List(@PathVariable String page_num) {
 
         ArrayList arrayList = new ArrayList<>();
@@ -26,7 +26,7 @@ public class CommonCodeController {
         return ResponseEntity.ok().body(arrayList);
     }
 
-    @GetMapping("/commonCode/view/{currentPage}/{perPage}/{page_num}")
+    @GetMapping("/q/r/QuestcommonCode/view/{currentPage}/{perPage}/{page_num}")
     public ResponseEntity<Object> view(@PathVariable String currentPage, @PathVariable String perPage,
             @PathVariable String page_num) {
 
