@@ -1,45 +1,27 @@
-package com.example.co_templates.restapis.quests.restapis;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.springframework.http.ResponseEntity;
+package com.example.co_templates.quests.restapis;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.example.co_templates.services.CommonCodeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 @RestController
 public class QuestCommonCodeController {
-    // /commonCode/1/10/1
-    @GetMapping("/q/r/QuestcommonCode/list/{page_num}")
-    public ResponseEntity<Object> List(@PathVariable String page_num) {
-
-        ArrayList arrayList = new ArrayList<>();
-        HashMap resultMap = new HashMap<>();
-        
-        resultMap.put("PK_ID", "CAR_01");
-        resultMap.put("FK_ID", "OPTION_01");
-        resultMap.put("NAME", "블랙박스");
-        
-        arrayList.add(resultMap);
-
-        return ResponseEntity.ok().body(arrayList);
+    @Autowired CommonCodeService commonCodeService;
+    @GetMapping("/q/r/commonCode/list/{pageNumber}")
+    public ResponseEntity<List<HashMap<String, Object>>> list(@PathVariable("pageNumber") Integer pageNumber) {
+        ArrayList<HashMap<String, Object>> itemList = new ArrayList<HashMap<String, Object>>();
+        // CommonCodeService commonCodeService = new CommonCodeService();
+        itemList = commonCodeService.list(pageNumber);
+        return ResponseEntity.ok().body(itemList);
     }
-
-    @GetMapping("/q/r/QuestcommonCode/view/{currentPage}/{perPage}/{page_num}")
-    public ResponseEntity<Object> view(@PathVariable String currentPage, @PathVariable String perPage,
-            @PathVariable String page_num) {
-
-        ArrayList arrayList = new ArrayList<>();
-        HashMap resultMap = new HashMap<>();
-        resultMap = new HashMap<>();
-        resultMap.put("PK_ID", "CAR_02");
-        resultMap.put("FK_ID", "OPTION_02");
-        resultMap.put("NAME", "핸들");
-        arrayList.add(resultMap);
-
-        return ResponseEntity.ok().body(arrayList);
+    @GetMapping("/q/r/commonCode/view/{pk_id}")
+    public ResponseEntity<HashMap<String, Object>> view(@PathVariable("pk_id") Integer pkId) {
+        HashMap<String, Object> itemDetails = new HashMap<>();
+        itemDetails = commonCodeService.view(pkId);
+        return ResponseEntity.ok().body(itemDetails);
     }
 }
-
-
